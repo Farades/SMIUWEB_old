@@ -26,6 +26,7 @@ public class DataDealerRunner extends HttpServlet {
     public void init() {
         engine = new Engine("C:\\workspace\\SMIUWEB\\config\\protocol.json");
         engine.init();
+        engine.run();
     }
     
     /**

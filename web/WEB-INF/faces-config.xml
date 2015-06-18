@@ -6,8 +6,19 @@
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>device</from-outcome>
+            <from-outcome>mfm</from-outcome>
             <to-view-id>/pages/mfm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>voltmeter</from-outcome>
+            <to-view-id>/pages/voltmeter.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ampermeter</from-outcome>
+            <to-view-id>/pages/ampermeter.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 </faces-config>

@@ -23,9 +23,30 @@ public class DeviceController {
     private Map<String, Device> allDevices = DataDealerRunner.engine.getDevices();
     
     public String selectDevice() {
+        String res = "";
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         deviceByName(params.get("device_name"));
-        return "device";
+        switch (currentDevice.getType()) {
+            case MFM: {
+                res = "mfm";
+                break;
+            } case VOLTMETER: {
+                res = "voltmeter";
+                break;
+            } case AMPERMETER: {
+                res = "ampermeter";
+                break;
+            }
+        }
+        return res;
+    }
+    
+    public String getCurrentDeviceValueByName(String name) {
+        String res = "Null";
+        if (currentDevice.getValues().get(name) != null) {
+            res = currentDevice.getValues().get(name).toString();
+        }
+        return res;
     }
     
     public void updateDevice(){

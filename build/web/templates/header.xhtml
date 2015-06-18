@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style_main.css"  />
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="header">
+                <div class="obj_name">Название объекта</div>
+                <div class="time_temp">
+                    <p>18 июня, 11:08</p>
+                    <p>Температура: 24&deg;C</p>
+                </div>
+                <div class="logo"><h:outputLink value="http://entel.su" target="_blank"><h:graphicImage library="img" name="logo.png" height="49px" width="170px" /></h:outputLink></div>
+            </div>          
+        </ui:composition>
+    </h:body>
+</html>

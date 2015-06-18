@@ -10,11 +10,16 @@
     </h:head>
     <h:body>
         <div class="main">
+            <ui:insert name="header">
+                <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
             <div class="block">
                 <h2>Дополнительные экраны</h2>
                 <ul>
-                    <li><h:graphicImage library="img" name="scheme.png" height="30px" /><h:outputLink value="#">Мнемосхема</h:outputLink></li>
-                    <li><h:graphicImage library="img" name="alert.png" height="30px" /><h:outputLink value="#">Исключительные ситуации</h:outputLink></li>
+                    <li><h:outputLink value="#"><h:graphicImage library="img" name="scheme.png" height="30px" />Мнемосхема</h:outputLink></li>
+                    <li><h:outputLink value="#"><h:graphicImage library="img" name="alert.png" height="30px" />Исключительные ситуации</h:outputLink></li>
+                    <li><h:outputLink value="#"><h:graphicImage library="img" name="settings_1.png" height="30px" />Настройки</h:outputLink></li>
+                    <li><h:outputLink value="#"><h:graphicImage library="img" name="gpio_1.png" height="30px" />Управление GPIO</h:outputLink></li>
                     <div style="clear: both;"></div>
                 </ul>
             </div>
@@ -24,8 +29,8 @@
                     <ul>
                         <ui:repeat value="#{deviceController.allDevices.entrySet().toArray()}" var="entry" >
                             <li>
-                                <h:graphicImage library="img" name="#{deviceController.getImage(entry.key)}" height="30px" />
-                                <h:commandLink value="#{entry.key}" action="#{deviceController.selectDevice()}" >
+                                <h:commandLink value="#{entry.key}" action="#{deviceController.selectDevice()}">
+                                    <h:graphicImage library="img" name="#{deviceController.getImage(entry.key)}" height="30px" />
                                     <f:param name="device_name" value="#{entry.key}" />
                                 </h:commandLink> 
                             </li>
