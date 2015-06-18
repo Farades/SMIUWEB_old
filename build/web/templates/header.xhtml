@@ -4,21 +4,25 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet library="css" name="style_main.css"  />
     </h:head>
     <h:body>
         <ui:composition>
-            <div class="header">
+            <h:form>
+                <p:poll interval="1" update=":header" />
+            </h:form>
+            <h:panelGroup id="header" layout="block" class="header">
                 <div class="obj_name">Название объекта</div>
                 <div class="time_temp">
-                    <p>18 июня, 11:08</p>
+                    <p>#{appController.time}</p>
                     <p>Температура: 24&deg;C</p>
                 </div>
                 <div class="logo"><h:outputLink value="http://entel.su" target="_blank"><h:graphicImage library="img" name="logo.png" height="49px" width="170px" /></h:outputLink></div>
-            </div>          
+            </h:panelGroup>        
         </ui:composition>
     </h:body>
 </html>

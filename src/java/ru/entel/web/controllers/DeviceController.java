@@ -67,7 +67,7 @@ public class DeviceController {
         Device d = this.allDevices.get(name);
         switch (d.getType()) {
             case MFM: {
-                res = "device.png";
+                res = "device_3.png";
                 break;
             }
             case VOLTMETER: {

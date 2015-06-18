@@ -17,6 +17,7 @@
                 <ui:insert name="content_title">
                     <ui:include src="/templates/content_title.xhtml" />
                 </ui:insert>
+                    
 
                 <h:form>
                     <p:poll interval="1" listener="#{deviceController.updateDevice()}" update=":values" />

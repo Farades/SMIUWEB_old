@@ -7,25 +7,25 @@ package ru.entel.web.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ru.entel.devices.Device;
 import ru.entel.engine.Engine;
 
-/**
- *
- * @author Farades
- */
+@ManagedBean
+@ApplicationScoped
 public class DataDealerRunner extends HttpServlet {
-
     public static Engine engine;
 
     public void init() {
         engine = new Engine("C:\\workspace\\SMIUWEB\\config\\protocol.json");
         engine.init();
+    }
+    
+    public void run() {
         engine.run();
     }
     
