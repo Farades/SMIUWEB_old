@@ -19,6 +19,7 @@ import ru.entel.engine.Engine;
 @ApplicationScoped
 public class DataDealerRunner extends HttpServlet {
     public static Engine engine;
+    private static boolean engineStatus = false;
 
     public void init() {
         engine = new Engine("C:\\workspace\\SMIUWEB\\config\\protocol.json");
@@ -26,18 +27,23 @@ public class DataDealerRunner extends HttpServlet {
     }
     
     public void run() {
-        engine.run();
+        if (engineStatus != true) {
+            engine.run();
+            engineStatus = true;
+        }
+    }
+
+    public void stop() {
+        if (engineStatus == true) {
+            engine.stop();
+            engineStatus = false;
+        }
     }
     
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    public static boolean isEngineStatus() {
+        return engineStatus;
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

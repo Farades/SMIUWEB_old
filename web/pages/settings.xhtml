@@ -22,7 +22,10 @@
                     <h1>Настройки</h1>
                 </div>
                 <h:outputLabel>IP-адрес СМИУ: #{appController.IP}</h:outputLabel>
-                
+                <h:form>
+                    <h:commandButton value="Старт" action="#{dataDealerRunner.run()}" styleClass="btn start" disabled="#{appController.engineState}" />
+                    <h:commandButton value="Стоп" action="#{dataDealerRunner.stop()}" styleClass="btn stop" disabled="#{!appController.engineState}"/>
+                </h:form>
             </div>
         </div>
     </h:body>

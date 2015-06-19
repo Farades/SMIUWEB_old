@@ -78,12 +78,16 @@ body {
 .time_temp {
     position: absolute;
     top: 0;
-    left: 300px;
+    left: 270px;
     height: 50px;
-    width: 160px;
+    width: 220px;
     line-height: 25px;
     text-align: center;
     color: #666;
+    vertical-align: middle;
+}
+.time_temp img {
+    vertical-align: middle;
 }
 .block {
     border: 2px solid #539858;
@@ -112,7 +116,7 @@ body {
 }
 
 .block li:hover {
-    background-color: #7EB681;
+    background-color: #00A651;
 }
 .block li:hover a {
     color: #fff;
@@ -204,6 +208,19 @@ body {
 .btn:hover {
   background: #00bd5b;
   text-decoration: none;
+  cursor: pointer;
+}
+.btn.stop:disabled, .btn.start:disabled {
+    background: #e5e5e5;
+    cursor: default;
+    color: #000;
+}
+.btn.start {
+    width: 100px;
+}
+.btn.stop {
+    width: 100px;
+    background: red;
 }
 #values {
     margin-top: 20px;
@@ -212,9 +229,10 @@ body {
     float: left;
     width: 220px;
     height: 130px;
-    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-    outline: 1px solid #357E3A;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    /*outline: 1px solid #357E3A;*/
     padding: 10px;
+    background: #F5F5F5;
 }
 .value_group>li>h2 {
     font-weight: bold;
