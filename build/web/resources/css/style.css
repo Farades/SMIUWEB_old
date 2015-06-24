@@ -274,3 +274,26 @@ body {
     padding: 10px;
     vertical-align: top;
 }
+.exceptions {
+    height: 320px;
+    overflow-y: auto;
+}
+.exceptions table {
+    width: 740px;
+    border-collapse: collapse;
+}
+.exceptions table td {
+    border: 1px solid black;
+    padding: 5px;  
+    color: #E42A26;
+}
+.exceptions table .deviceName {
+    text-align: center;
+    font-weight: bold;
+    background-color: #00bd5b;
+    color: #fff;
+}
+.exceptions table th {
+    padding: 5px;
+    font-weight: bold;
+}

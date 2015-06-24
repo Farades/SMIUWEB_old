@@ -5,11 +5,13 @@
  */
 package ru.entel.web.controllers;
 
+import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import ru.entel.devices.Device;
+import ru.entel.devices.DeviceException;
 import ru.entel.web.servlets.DataDealerRunner;
 
 /**
@@ -21,6 +23,7 @@ import ru.entel.web.servlets.DataDealerRunner;
 public class DeviceController {
     private Device currentDevice;
     private Map<String, Device> allDevices = DataDealerRunner.engine.getDevices();
+    private Map<String, DeviceException[]> activeExceptions = new HashMap<String, DeviceException[]>();
     
     public String selectDevice() {
         String res = "";
@@ -84,5 +87,16 @@ public class DeviceController {
 
     public Map<String, Device> getAllDevices() {
         return allDevices;
+    }
+
+    public Map<String, DeviceException[]> getAllActiveExceptions() {
+        this.activeExceptions.clear();
+        for (Device device : allDevices.values()) {
+            DeviceException[] exArr = device.getActiveExceptions().toArray(new DeviceException[device.getActiveExceptions().size()]);
+            if (exArr.length > 0) {
+                this.activeExceptions.put(device.getName(), exArr);
+            }
+        }
+        return activeExceptions;
     }
 }

@@ -17,7 +17,7 @@
                 <h2>Дополнительные экраны</h2>
                 <ul>
                     <li><h:outputLink value="#"><h:graphicImage library="img" name="scheme.png" height="30px" />Мнемосхема</h:outputLink></li>
-                    <li><h:outputLink value="#"><h:graphicImage library="img" name="alert.png" height="30px" />Исключительные ситуации</h:outputLink></li>
+                    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/exceptions.xhtml"><h:graphicImage library="img" name="alert.png" height="30px" />Исключительные ситуации</h:outputLink></li>
                     <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/settings.xhtml"><h:graphicImage library="img" name="settings_1.png" height="30px" />Настройки</h:outputLink></li>
                     <li><h:outputLink value="#"><h:graphicImage library="img" name="gpio_1.png" height="30px" />Управление GPIO</h:outputLink></li>
                     <div style="clear: both;"></div>
