@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Entel СМИУ</title>
         <h:outputStylesheet library="css" name="style.css" />
@@ -19,30 +20,37 @@
                         <h:graphicImage library="img" name="back.png" height="15px" />
                         вернуться
                     </h:outputLink>
+                    <h:outputLink styleClass="btn history_link" value="#{facesContext.externalContext.request.contextPath}/pages/ex_history.xhtml">История</h:outputLink>
                     <h1>Исключительные ситуации</h1>
+                    
                     <h:form>
                         <p:poll interval="1" update=":exceptions" />
                     </h:form>
                     <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
-                        <table>
-                            <thead>
-                                <th>Время</th>
-                                <th>Описание</th>
-                                <th>Текущее значение</th>
-                            </thead>
-                            <tbody>
-                                <ui:repeat value="#{deviceController.allActiveExceptions.keySet().toArray()}" var="actExKey">
-                                    <tr><td colspan="3" class="deviceName">#{actExKey}</td></tr>
-                                    <ui:repeat value="#{deviceController.allActiveExceptions[actExKey]}" var="actEx">
-                                        <tr>
-                                            <td>23.06.15 17:31:46</td>
-                                            <td>#{actEx.description}</td>
-                                            <td>#{actEx.currentValue}</td>
-                                        </tr>
+                        <c:if test="#{not empty deviceController.allActiveExceptions.keySet().toArray()}">
+                            <table>
+                                <thead>
+                                    <th>Время</th>
+                                    <th>Описание</th>
+                                    <th>Текущее значение</th>
+                                </thead>
+                                <tbody>
+                                    <ui:repeat value="#{deviceController.allActiveExceptions.keySet().toArray()}" var="actExKey">
+                                        <tr><td colspan="3" class="deviceName">#{actExKey}</td></tr>
+                                        <ui:repeat value="#{deviceController.allActiveExceptions[actExKey]}" var="actEx">
+                                            <tr>
+                                                <td>23.06.15 17:31:46</td>
+                                                <td>#{actEx.description}</td>
+                                                <td>#{actEx.currentValue}</td>
+                                            </tr>
+                                        </ui:repeat>
                                     </ui:repeat>
-                                </ui:repeat>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </c:if>
+                        <c:if test="#{empty deviceController.allActiveExceptions.keySet().toArray()}">
+                            <p style="font-weight: bold; text-align: center; font-size: 16px;">Все измеряемые параметры системы находятся в допустимых пределах.</p>
+                        </c:if>
                     </h:panelGroup>
                 </div>
             </div>

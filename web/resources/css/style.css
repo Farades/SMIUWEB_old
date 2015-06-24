@@ -275,11 +275,13 @@ body {
     vertical-align: top;
 }
 .exceptions {
-    height: 320px;
+    height: 305px;
     overflow-y: auto;
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+    border: 10px solid #fff;
 }
 .exceptions table {
-    width: 740px;
+    width: 720px;
     border-collapse: collapse;
 }
 .exceptions table td {
@@ -296,4 +298,10 @@ body {
 .exceptions table th {
     padding: 5px;
     font-weight: bold;
+}
+.history_link {
+    position: absolute;
+    height: 15px;
+    top: 0px;
+    left: 130px;
 }

@@ -5,11 +5,14 @@
  */
 package ru.entel.web.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import ru.entel.db.DeviceExceptionFromDb;
+import ru.entel.db.HistoryDeviceException;
 import ru.entel.devices.Device;
 import ru.entel.devices.DeviceException;
 import ru.entel.web.servlets.DataDealerRunner;
@@ -98,5 +101,9 @@ public class DeviceController {
             }
         }
         return activeExceptions;
+    }
+    
+    public ArrayList<DeviceExceptionFromDb> getHistoryException() {
+        return HistoryDeviceException.getHistory();
     }
 }
