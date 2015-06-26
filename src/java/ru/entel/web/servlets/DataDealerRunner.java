@@ -5,14 +5,23 @@
  */
 package ru.entel.web.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import ru.entel.engine.Engine;
 
 @ManagedBean
@@ -22,8 +31,14 @@ public class DataDealerRunner extends HttpServlet {
     private static boolean engineStatus = false;
 
     public void init() {
-        engine = new Engine("C:\\workspace\\SMIUWEB\\config\\protocol.json");
-        engine.init();
+        try {
+            InitialContext ic = new InitialContext();
+            DataSource ds = (DataSource) ic.lookup("jdbc/SQLite");
+            engine = new Engine("/config/protocol.json", "C:\\workspace\\SMIUWEB\\config\\devices.json", ds);
+            engine.init();
+        } catch (NamingException ex) {
+            Logger.getLogger(DataDealerRunner.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void run() {

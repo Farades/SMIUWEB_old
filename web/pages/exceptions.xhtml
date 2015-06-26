@@ -39,7 +39,7 @@
                                         <tr><td colspan="3" class="deviceName">#{actExKey}</td></tr>
                                         <ui:repeat value="#{deviceController.allActiveExceptions[actExKey]}" var="actEx">
                                             <tr>
-                                                <td>23.06.15 17:31:46</td>
+                                                <td>#{actEx.time_start}</td>
                                                 <td>#{actEx.description}</td>
                                                 <td>#{actEx.currentValue}</td>
                                             </tr>
