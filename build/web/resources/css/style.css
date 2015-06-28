@@ -305,3 +305,21 @@ body {
     top: 0px;
     left: 130px;
 }
+.config_textarea {
+    width: 100%;
+    margin-top: 20px;
+    height: 280px;
+}
+.settings_data {
+    padding: 10px;
+    font-size: 16px;
+}
+.dataEngineStart {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.dataEngineStart .buttons {
+    margin-top: 10px;
+}

@@ -12,7 +12,6 @@
     <servlet>
         <servlet-name>DataDealerRunner</servlet-name>
         <servlet-class>ru.entel.web.servlets.DataDealerRunner</servlet-class>
-        <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>

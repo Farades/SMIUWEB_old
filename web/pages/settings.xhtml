@@ -21,11 +21,27 @@
                     </h:outputLink>
                     <h1>Настройки</h1>
                 </div>
-                <h:outputLabel>IP-адрес СМИУ: #{appController.IP}</h:outputLabel>
-                <h:form>
-                    <h:commandButton value="Старт" action="#{dataDealerRunner.run()}" styleClass="btn start" disabled="#{appController.engineState}" />
-                    <h:commandButton value="Стоп" action="#{dataDealerRunner.stop()}" styleClass="btn stop" disabled="#{!appController.engineState}"/>
-                </h:form>
+                <div class="block settings_data">
+                    <h:outputLabel>IP-адрес СМИУ: #{appController.IP}</h:outputLabel>
+                </div>
+                <div class="block dataEngineStart">
+                    <h:form>
+                        <h2>Управление опросом устройств</h2>
+                        <div class="buttons">
+                            <h:commandButton value="Старт" action="#{webEngine.dataEngineRun()}" styleClass="btn start" disabled="#{appController.engineState}" />
+                            <h:commandButton value="Стоп" action="#{webEngine.dataEnginestop()}" styleClass="btn stop" disabled="#{!appController.engineState}"/>
+                        </div>
+                    </h:form>
+                    <div style="clear: both;"></div>
+                </div>
+                <div class="block">
+                    <h2>Настройки проекта</h2>
+                    <ul>
+                        <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/devices_config.xhtml">Настройка устройств</h:outputLink></li>
+                        <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/protocol_config.xhtml">Настройка опросного листа</h:outputLink></li>
+                        <div style="clear: both;"></div>
+                    </ul>
+                </div>
             </div>
         </div>
     </h:body>

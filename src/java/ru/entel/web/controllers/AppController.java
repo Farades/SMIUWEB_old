@@ -16,7 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
-import ru.entel.web.servlets.DataDealerRunner;
+import javax.faces.bean.ManagedProperty;
+import ru.entel.web.beans.WebEngine;
 
 /**
  *
@@ -25,10 +26,9 @@ import ru.entel.web.servlets.DataDealerRunner;
 @ManagedBean
 @ApplicationScoped
 public class AppController {
-
-    /**
-     * Creates a new instance of AppController
-     */
+    @ManagedProperty(value = "#{webEngine}")
+    private WebEngine webEngine;
+    
     public AppController() {
     }
     
@@ -53,13 +53,21 @@ public class AppController {
     
     public String getStrEngineStatus() {
         String res = "off.jpg";
-        if (DataDealerRunner.isEngineStatus()) {
+        if (webEngine.isDataEngineStatus()) {
             res = "on.jpg";
         }
         return res;
     }
     
     public boolean isEngineState() {
-        return DataDealerRunner.isEngineStatus();
+        return webEngine.isDataEngineStatus();
+    }
+
+    public WebEngine getWebEngine() {
+        return webEngine;
+    }
+
+    public void setWebEngine(WebEngine webEngine) {
+        this.webEngine = webEngine;
     }
 }

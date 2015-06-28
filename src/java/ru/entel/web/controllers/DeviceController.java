@@ -8,25 +8,36 @@ package ru.entel.web.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import ru.entel.db.DeviceExceptionFromDb;
 import ru.entel.db.HistoryDeviceException;
 import ru.entel.devices.Device;
 import ru.entel.devices.DeviceException;
-import ru.entel.web.servlets.DataDealerRunner;
+import ru.entel.web.beans.WebEngine;
 
-/**
- *
- * @author Farades
- */
 @ManagedBean
 @ApplicationScoped
 public class DeviceController {
+    @ManagedProperty(value = "#{webEngine}")
+    private WebEngine webEngine;
+    
     private Device currentDevice;
-    private Map<String, Device> allDevices = DataDealerRunner.engine.getDevices();
-    private Map<String, DeviceException[]> activeExceptions = new HashMap<String, DeviceException[]>();
+    private Map<String, Device> allDevices;
+    private Map<String, DeviceException[]> activeExceptions;
+
+    public DeviceController() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        allDevices = webEngine.getDataEngine().getDevices();
+        activeExceptions = new HashMap<String, DeviceException[]>();
+    }
     
     public String selectDevice() {
         String res = "";
@@ -105,5 +116,13 @@ public class DeviceController {
     
     public ArrayList<DeviceExceptionFromDb> getHistoryException() {
         return HistoryDeviceException.getHistory();
+    }
+
+    public WebEngine getWebEngine() {
+        return webEngine;
+    }
+
+    public void setWebEngine(WebEngine webEngine) {
+        this.webEngine = webEngine;
     }
 }

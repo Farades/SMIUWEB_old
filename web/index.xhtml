@@ -29,7 +29,7 @@
                     <ul>
                         <ui:repeat value="#{deviceController.allDevices.entrySet().toArray()}" var="entry" >
                             <li>
-                                <h:commandLink value="#{entry.key}" action="#{deviceController.selectDevice()}">
+                                <h:commandLink value="#{entry.value.description}" action="#{deviceController.selectDevice()}">
                                     <h:graphicImage library="img" name="#{deviceController.getImage(entry.key)}" height="30px" />
                                     <f:param name="device_name" value="#{entry.key}" />
                                 </h:commandLink> 
