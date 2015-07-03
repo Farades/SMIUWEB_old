@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
@@ -13,6 +21,10 @@
         <servlet-name>DataDealerRunner</servlet-name>
         <servlet-class>ru.entel.web.servlets.DataDealerRunner</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PdfContent</servlet-name>
+        <servlet-class>ru.entel.web.servlets.PdfContent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
@@ -20,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>DataDealerRunner</servlet-name>
         <url-pattern>/DataDealerRunner</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PdfContent</servlet-name>
+        <url-pattern>/PdfContent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
