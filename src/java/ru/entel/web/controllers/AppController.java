@@ -7,6 +7,10 @@ package ru.entel.web.controllers;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +21,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedProperty;
+import ru.entel.db.Database;
 import ru.entel.web.beans.WebEngine;
 
 /**
@@ -26,10 +31,25 @@ import ru.entel.web.beans.WebEngine;
 @ManagedBean
 @ApplicationScoped
 public class AppController {
+    private String objName;
+    
     @ManagedProperty(value = "#{webEngine}")
     private WebEngine webEngine;
     
     public AppController() {
+        try {
+            Statement stm = null;
+            Connection conn = null;
+            ResultSet rst = null;
+            conn = Database.getInstance().getConn();
+            stm = conn.createStatement();
+            rst = stm.executeQuery("SELECT `value` FROM `properties` WHERE name='obj_name'");
+            while(rst.next()) {
+                this.objName = rst.getString("value");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public String getTime() {
@@ -49,6 +69,11 @@ public class AppController {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return myLANIP;
+    }
+    
+    public String getObjName() {
+        
+        return this.objName;
     }
     
     public String getStrEngineStatus() {

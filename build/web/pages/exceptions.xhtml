@@ -21,7 +21,7 @@
                         вернуться
                     </h:outputLink>
                     <h:outputLink styleClass="btn history_link" value="#{facesContext.externalContext.request.contextPath}/pages/ex_history.xhtml">История</h:outputLink>
-                    <h1>Исключительные ситуации</h1>
+                    <h1 style="color: red;">Аварии</h1>
                     
                     <h:form>
                         <p:poll interval="1" update=":exceptions" />
@@ -35,9 +35,9 @@
                                     <th>Текущее значение</th>
                                 </thead>
                                 <tbody>
-                                    <ui:repeat value="#{deviceController.allActiveExceptions.keySet().toArray()}" var="actExKey">
-                                        <tr><td colspan="3" class="deviceName">#{actExKey}</td></tr>
-                                        <ui:repeat value="#{deviceController.allActiveExceptions[actExKey]}" var="actEx">
+                                    <ui:repeat value="#{deviceController.allActiveExceptions.entrySet().toArray()}" var="actExEntry">
+                                        <tr><td colspan="3" class="deviceName">#{actExEntry.key}</td></tr>
+                                        <ui:repeat value="#{actExEntry.value.toArray()}" var="actEx">
                                             <tr>
                                                 <td>#{actEx.time_start}</td>
                                                 <td>#{actEx.description}</td>

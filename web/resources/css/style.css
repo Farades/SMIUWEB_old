@@ -286,13 +286,15 @@ body {
 }
 .exceptions table td {
     border: 1px solid black;
-    padding: 5px;  
-    color: #E42A26;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
 }
 .exceptions table .deviceName {
     text-align: center;
     font-weight: bold;
-    background-color: #00bd5b;
+    background-color: #FF0000;
     color: #fff;
 }
 .exceptions table th {

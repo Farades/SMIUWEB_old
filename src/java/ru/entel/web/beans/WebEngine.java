@@ -36,7 +36,6 @@ public class WebEngine {
         try {
             InitialContext ic = new InitialContext();
             DataSource ds = (DataSource) ic.lookup("jdbc/smiu");
-            dataEngine = null;
             dataEngine = new Engine(ds);
             dataEngine.init();
         } catch (NamingException ex) {

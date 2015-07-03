@@ -137,6 +137,10 @@ public class ConfiguratorController {
         return buf.toString();
     }
     
+    public void saveConfig() {
+        
+    }
+    
     public String getDevicesData() {
         return devicesData;
     }

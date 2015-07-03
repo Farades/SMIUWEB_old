@@ -8,6 +8,7 @@ package ru.entel.web.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +17,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import ru.entel.db.DeviceExceptionFromDb;
 import ru.entel.db.HistoryDeviceException;
+import ru.entel.db.LogRow;
+import ru.entel.db.LogSaverDB;
 import ru.entel.devices.Device;
 import ru.entel.devices.DeviceException;
 import ru.entel.web.beans.WebEngine;
@@ -28,7 +31,7 @@ public class DeviceController {
     
     private Device currentDevice;
     private Map<String, Device> allDevices;
-    private Map<String, DeviceException[]> activeExceptions;
+    private Map<String, Set<DeviceException>> activeExceptions;
 
     public DeviceController() {
     }
@@ -36,7 +39,7 @@ public class DeviceController {
     @PostConstruct
     public void init() {
         allDevices = webEngine.getDataEngine().getDevices();
-        activeExceptions = new HashMap<String, DeviceException[]>();
+        activeExceptions = new HashMap<String, Set<DeviceException>>();
     }
     
     public String selectDevice() {
@@ -67,6 +70,7 @@ public class DeviceController {
     }
     
     public void updateDevice(){
+        System.out.println(currentDevice.getValues());
         System.out.println("update" + currentDevice.getName());
     }
 
@@ -103,12 +107,12 @@ public class DeviceController {
         return allDevices;
     }
 
-    public Map<String, DeviceException[]> getAllActiveExceptions() {
+    public Map<String, Set<DeviceException>> getAllActiveExceptions() {
         this.activeExceptions.clear();
         for (Device device : allDevices.values()) {
-            DeviceException[] exArr = device.getActiveExceptions().toArray(new DeviceException[device.getActiveExceptions().size()]);
-            if (exArr.length > 0) {
-                this.activeExceptions.put(device.getName(), exArr);
+            Set<DeviceException> activeExceptionByDevice = device.getActiveExceptions();
+            if (activeExceptionByDevice.size() > 0) {
+                this.activeExceptions.put(device.getDescription(), activeExceptionByDevice);
             }
         }
         return activeExceptions;
@@ -116,6 +120,10 @@ public class DeviceController {
     
     public ArrayList<DeviceExceptionFromDb> getHistoryException() {
         return HistoryDeviceException.getHistory();
+    }
+    
+    public ArrayList<LogRow> getDataLogs() {
+        return LogSaverDB.getDataLogs();
     }
 
     public WebEngine getWebEngine() {
