@@ -141,7 +141,7 @@ body {
     font-size: 18px;
 }
 .block.devices {
-    height: 172px;
+    height: 125px;
     overflow-y: scroll;
     overflow-x: hidden;
     border: 2px solid #407275;
@@ -264,7 +264,7 @@ body {
 .mt20 {
     margin-top: 20px;
 }
-.col1{
+/*.col1{
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -273,7 +273,7 @@ body {
 .col2{
     padding: 10px;
     vertical-align: top;
-}
+}*/
 .exceptions {
     height: 305px;
     overflow-y: auto;
@@ -324,4 +324,64 @@ body {
 
 .dataEngineStart .buttons {
     margin-top: 10px;
+}
+#docs_list {
+    padding-top: 5px;
+}
+#docs_list h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+.docs_table {
+    margin-top: 5px;
+    width: 740px;
+}
+.docs_table .col1 {
+    width: 85%;
+}
+.docs_table .col3 {
+    width: 15%;
+}
+.docs_table td, docs_table th {
+    padding: 5px 5px;
+    border: 1px solid #ccc;
+}
+
+.docs_table th {
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}
+.docs_table tbody tr {
+    border: 1px solid #ccc;
+}
+.docs_list_wrap {
+    width: 760px;
+    overflow-y: scroll;
+    height: 200px;
+    outline: 1px solid #ccc;
+    margin-top: 5px;
+}
+.docs_view_table {
+    width: 740px;
+}
+.docs_view_table td {
+    border: 1px solid #ccc;
+    vertical-align: middle;
+}
+.docs_view_table td a {
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    text-decoration: none;
+    color: #295F61;
+    font-weight: bold;
+}
+.docs_view_table td a:hover {
+    color: #fff;
+    background-color: #00A651;
+}
+.docs_list_wrap.docs_view_wrap {
+    height: 340px;
 }

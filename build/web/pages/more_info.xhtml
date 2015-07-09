@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Entel СМИУ</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <div class="main">
+            <ui:insert name="header">
+                <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
+            <div class="content">
+                <div class="content_title">
+                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
+                        <h:graphicImage library="img" name="back.png" height="15px" />
+                        вернуться
+                    </h:outputLink>
+                    <h1>Дополнительная информация</h1>
+                </div>
+                <div class="block">
+                    <h2></h2>
+                    <ul>
+                        <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/docs.xhtml"><h:graphicImage library="img" name="docs.png" height="30px" />Документация</h:outputLink></li>
+                        <div style="clear: both;"></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

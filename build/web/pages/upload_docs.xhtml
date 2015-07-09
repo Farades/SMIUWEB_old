@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Entel СМИУ</title>
         <h:outputStylesheet library="css" name="style.css" />
@@ -15,15 +16,48 @@
             </ui:insert>
             <div class="content">
                 <div class="content_title">
-                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
+                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/settings.xhtml" styleClass="btn back">
                         <h:graphicImage library="img" name="back.png" height="15px" />
                         вернуться
                     </h:outputLink>
                     <h1>Добавление документации</h1>
+                    <h:panelGroup id="docs_list" layout="block">
+                        <h2>Загруженная документация</h2>
+                        <div class="docs_list_wrap">
+                            <table class="docs_table">
+                                <thead>
+                                    <th>Название</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+
+                                    <ui:repeat value="#{pdfController.docs}" var="doc">
+                                        <tr>
+                                            <td class="col1">
+                                                <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
+                                                   #{doc.descr}
+                                                    <f:param name="id" value="#{doc.id}"/>
+                                                </h:outputLink>
+                                            </td>
+                                            <td class="col3">
+                                                <h:form>
+                                                    <p:commandButton actionListener="#{pdfController.deleteDoc()}" value="Удалить" update=":docs_list">
+                                                        <f:param name="doc_id" value="#{doc.id}" />
+                                                    </p:commandButton>
+                                                </h:form>
+                                            </td>
+                                        </tr>
+                                    </ui:repeat> 
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </h:panelGroup>
+                    <br />
                     <h:form enctype="multipart/form-data" id="formUploadPdf">
-                        <p:fileUpload  id="pdfUpload" label="Загрузка документа" update="messages-pdf" fileUploadListener="#{pdfController.handleFileUpload}" allowTypes="/(\.|\/)(pdf)$/" multiple="false" auto="true" styleClass="pdf-upload"/>   
-                        <p:messages id="messages-pdf" showDetail="true" for="formUploadPdf"/>
-                        <p:commandButton actionListener="#{pdfController.savePdf()}" value="Сохранить" icon="ui-icon-check"  onclick="this.disabled=true;" />
+                        <p:fileUpload fileUploadListener="#{pdfController.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                            update="messages :docs_list @form" sizeLimit="16777215" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" />
+                        <p:growl id="messages" showDetail="true" />
                     </h:form>
 
                 </div>

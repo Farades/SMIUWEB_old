@@ -5,17 +5,20 @@
         <group>
             <file>file:/C:/workspace/SMIUWEB/web/pages/upload_docs.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/web/pages/ex_history.xhtml</file>
+            <file>file:/C:/workspace/SMIUWEB/web/pages/more_info.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/web/pages/exceptions.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/web/pages/devices_config.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/web/pages/settings.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/web/index.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/web/WEB-INF/web.xml</file>
             <file>file:/C:/workspace/SMIUWEB/src/java/ru/entel/web/servlets/PdfContent.java</file>
+            <file>file:/C:/workspace/SMIUWEB/web/resources/css/style.css</file>
             <file>file:/C:/workspace/SMIUWEB/src/java/ru/entel/web/controllers/AppController.java</file>
             <file>file:/C:/workspace/SMIUWEB/src/java/ru/entel/web/controllers/ConfiguratorController.java</file>
             <file>file:/C:/workspace/SMIUWEB/web/templates/header.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/src/java/ru/entel/web/controllers/DeviceController.java</file>
             <file>file:/C:/workspace/SMIUWEB/web/pages/logs.xhtml</file>
+            <file>file:/C:/workspace/SMIUWEB/web/pages/docs.xhtml</file>
             <file>file:/C:/workspace/SMIUWEB/src/java/ru/entel/web/controllers/PdfController.java</file>
         </group>
     </open-files>
