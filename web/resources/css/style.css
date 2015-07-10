@@ -264,6 +264,9 @@ body {
 .mt20 {
     margin-top: 20px;
 }
+.mt10 {
+    margin-top: 10px;
+}
 /*.col1{
     padding: 10px;
     font-weight: bold;
@@ -274,7 +277,7 @@ body {
     padding: 10px;
     vertical-align: top;
 }*/
-.exceptions {
+/*.exceptions {
     height: 305px;
     overflow-y: auto;
     box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
@@ -300,6 +303,13 @@ body {
 .exceptions table th {
     padding: 5px;
     font-weight: bold;
+}*/
+.exceptions table td {
+    vertical-align: middle;
+    font-size: 12px;
+}
+.exceptions ui-paginator img {
+    vertical-align: middle; 
 }
 .history_link {
     position: absolute;

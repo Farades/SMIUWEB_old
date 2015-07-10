@@ -28,12 +28,13 @@
                                     <ui:repeat value="#{pdfController.docs}" var="doc">
                                         <tr>
                                             <td class="col1">
-                                                
-                                                <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
-                                                    <h:graphicImage library="img" name="pdf.png" height="40px" />
-                                                    #{doc.descr}
-                                                    <f:param name="id" value="#{doc.id}"/>
-                                                </h:outputLink>
+                                                <p:lightBox iframe="true" id="lighbox3">
+                                                    <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
+                                                        <h:graphicImage library="img" name="pdf.png" height="40px" />
+                                                        #{doc.descr}
+                                                        <f:param name="id" value="#{doc.id}"/>
+                                                    </h:outputLink>
+                                                </p:lightBox>
                                             </td>
                                         </tr>
                                     </ui:repeat> 

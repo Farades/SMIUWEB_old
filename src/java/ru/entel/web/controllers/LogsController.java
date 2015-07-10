@@ -5,8 +5,10 @@
  */
 package ru.entel.web.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 import org.primefaces.event.SelectEvent;
@@ -21,11 +23,13 @@ import ru.entel.db.LogSaverDB;
 @ApplicationScoped
 public class LogsController {
     private Date logsDate;
-    
-    /**
-     * Creates a new instance of LogsController
-     */
+
     public LogsController() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        this.logsDate = new Date();
     }
 
     public Date getLogsDate() {
@@ -51,5 +55,10 @@ public class LogsController {
         }
     }
     
+    public String getDataLogsFileName() {
+        SimpleDateFormat sf = new SimpleDateFormat("dd_MM_yyyy");
+        String date = sf.format(this.logsDate);
+        return "data_logs_" + date;
+    }
     
 }

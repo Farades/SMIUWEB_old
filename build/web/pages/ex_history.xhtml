@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Entel СМИУ</title>
         <h:outputStylesheet library="css" name="style.css" />
@@ -21,28 +22,39 @@
                         вернуться
                     </h:outputLink>
                     <h1 style="color: red;">Лог аварий</h1>
-                    <h:form>
-                        <p:poll interval="30" update=":exceptions" />
-                    </h:form>
-                    <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
-                        <div class="ex_wrapper">
-                            <table>
-                                <thead>
-                                    <th>Время</th>
-                                    <th>Описание</th>
-                                    <th>Состояние</th>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat value="#{deviceController.historyException}" var="ex">
-                                        <tr>
-                                            <td>#{ex.time}</td>
-                                            <td style="text-align: left;">#{ex.description}</td>
-                                            <td>${ex.state}</td>
-                                        </tr>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
-                        </div>
+                    <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt10">
+                        <h:form>
+                            <p:dataTable id="tbl" var="ex" value="#{deviceController.historyException}" 
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+
+                                <f:facet name="{Exporters}">
+                                    <h:commandLink>
+                                        <h:graphicImage library="img" name="excel.png" height="22px" style="vertical-align: middle;" />
+                                        <p:dataExporter type="xls" target="tbl" fileName="#{logsController.dataLogsFileName}" />
+                                    </h:commandLink>
+                                </f:facet>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Время" />
+                                    </f:facet>
+                                    <h:outputText value="#{ex.time}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Описание" />
+                                    </f:facet>
+                                    <h:outputText value="#{ex.description}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Состояние" />
+                                    </f:facet>
+                                    <h:outputText value="#{ex.state}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
                     </h:panelGroup>
                 </div>
             </div>
