@@ -42,8 +42,8 @@ public class PdfContent extends HttpServlet {
             
             
             byte[] content = null;
+            Connection conn = Database.getInstance().getConn();
             try {
-                Connection conn = Database.getInstance().getConn();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("select file from docs where id=" + id);
                 while (rs.next()) {
@@ -52,7 +52,7 @@ public class PdfContent extends HttpServlet {
             } catch(SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                Database.getInstance().closeConnection();
+                conn.close();
             }
             response.setContentLength(content.length);
             out.write(content);

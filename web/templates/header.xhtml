@@ -12,13 +12,10 @@
     </h:head>
     <h:body>
         <ui:composition>
-            <h:form>
-                <p:poll interval="1" update=":header" />
-            </h:form>
             <h:panelGroup id="header" layout="block" class="header">
                 <div class="obj_name">#{appController.objName}</div>
                 <div class="time_temp">
-                    <p>#{appController.time}</p>
+                    <p><p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /></p>
                     <p><span style="font-weight: bold;">Темп.:</span> 24&deg;C&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">Статус:</span>&nbsp;<h:graphicImage library="img" name="#{appController.strEngineStatus}" height="16px" /></p>
                 </div>
                 <div class="logo"><h:outputLink value="http://entel.su" target="_blank"><h:graphicImage library="img" name="logo.png" height="49px" width="170px" /></h:outputLink></div>

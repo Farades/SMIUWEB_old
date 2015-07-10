@@ -71,7 +71,7 @@ public class DeviceController {
     
     public void updateDevice(){
         System.out.println(currentDevice.getValues());
-        System.out.println("update" + currentDevice.getName());
+        System.out.println("update: " + currentDevice.getName());
     }
 
     public void deviceByName(String name) {
@@ -120,10 +120,6 @@ public class DeviceController {
     
     public ArrayList<DeviceExceptionFromDb> getHistoryException() {
         return HistoryDeviceException.getHistory();
-    }
-    
-    public ArrayList<LogRow> getDataLogs() {
-        return LogSaverDB.getDataLogs();
     }
 
     public WebEngine getWebEngine() {

@@ -385,3 +385,11 @@ body {
 .docs_list_wrap.docs_view_wrap {
     height: 340px;
 }
+.select_date {
+    text-align: center;
+    margin-top: 10px;
+}
+.select_date label {
+    margin-right: 10px;
+    font-weight: bold;
+}

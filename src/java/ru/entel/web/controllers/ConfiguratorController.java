@@ -57,8 +57,9 @@ public class ConfiguratorController {
         Statement stm = null;
         Connection conn = null;
         ResultSet rst = null;
+        conn = Database.getInstance().getConn();
         try {
-            conn = Database.getInstance().getConn();
+            
             stm = conn.createStatement();
             rst = stm.executeQuery("SELECT DATA FROM JSON_CONFIG WHERE NAME='devices'");
             while(rst.next()) {
@@ -71,7 +72,11 @@ public class ConfiguratorController {
         } catch (SQLException ex) {
             Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Database.getInstance().closeConnection();
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         JsonParser parser = new JsonParser();
@@ -97,7 +102,11 @@ public class ConfiguratorController {
         } catch (SQLException ex) {
             Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Database.getInstance().closeConnection();
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         //Переинициализация приложения
         webEngine.dataEnginestop();
@@ -117,7 +126,11 @@ public class ConfiguratorController {
         } catch (SQLException ex) {
             Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Database.getInstance().closeConnection();
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         //Переинициализация приложения
         webEngine.dataEnginestop();

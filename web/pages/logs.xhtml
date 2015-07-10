@@ -11,9 +11,7 @@
     </h:head>
     <h:body>
         <div class="main">
-            <ui:insert name="header">
-                <ui:include src="/templates/header.xhtml" />
-            </ui:insert>
+            <ui:include src="/templates/header.xhtml" />
             <div class="content">
                 <div class="content_title">
                     <h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml" styleClass="btn back">
@@ -21,30 +19,35 @@
                         вернуться
                     </h:outputLink>
                     <h1>Лог данных</h1>
-                    <h:form>
-                        <p:poll interval="30" update=":exceptions" />
-                    </h:form>
-                    <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
-                        <div class="ex_wrapper">
-                            <table>
-                                <thead>
-                                    <th>Время</th>
-                                    <th>Устройство</th>
-                                    <th>Значения</th>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat value="#{deviceController.dataLogs}" var="log">
-                                        <tr>
-                                            <td>#{log.time}</td>
-                                            <td style="text-align: left;">#{log.device}</td>
-                                            <td style="text-align: left;">${log.data}</td>
-                                        </tr>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
-                        </div>
-                    </h:panelGroup>
                 </div>
+                <div class="select_date">
+                    <h:form>
+                        <p:outputLabel for="event" value="Выберите дату:" />
+                        <p:calendar id="event" value="#{logsController.logsDate}">
+                            <p:ajax event="dateSelect" listener="#{logsController.dateSelect}" update=":exceptions" />
+                        </p:calendar>
+                    </h:form>
+                </div>
+                <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
+                    <div class="ex_wrapper">
+                        <table>
+                            <thead>
+                                <th>Время</th>
+                                <th>Устройство</th>
+                                <th>Значения</th>
+                            </thead>
+                            <tbody>
+                                <ui:repeat value="#{logsController.dataLogs}" var="log">
+                                    <tr>
+                                        <td>#{log.time}</td>
+                                        <td style="text-align: left;">#{log.device}</td>
+                                        <td style="text-align: left;">${log.data}</td>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                </h:panelGroup>
             </div>
         </div>
     </h:body>

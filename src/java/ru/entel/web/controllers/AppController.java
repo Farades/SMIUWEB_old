@@ -55,7 +55,7 @@ public class AppController {
     public String getTime() {
         Date currentTime = new Date();
         Locale locale = new Locale("ru", "RU");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy HH:mm");
         String res = dateFormat.format(currentTime);
         return res;
     }

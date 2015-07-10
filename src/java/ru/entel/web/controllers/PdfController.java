@@ -44,8 +44,9 @@ public class PdfController implements Serializable {
     public void handleFileUpload(FileUploadEvent event) {
         UploadedFile file = event.getFile();
         if(file != null && file.getSize() > 10) {
+            Connection conn = Database.getInstance().getConn();
             try {
-                Connection conn = Database.getInstance().getConn();
+                
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO DOCS (descr, file) VALUES(?, ?)");
                 stmt.setString(1, file.getFileName());
                 stmt.setObject(2, file.getContents());
@@ -56,7 +57,11 @@ public class PdfController implements Serializable {
             } catch(SQLException ex) {
                 ex.printStackTrace();
             } finally {
-                Database.getInstance().closeConnection();
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PdfController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             file = null;
         } else {
@@ -67,8 +72,9 @@ public class PdfController implements Serializable {
     
     public void updateDocs() {
         docs.clear();
+        Connection conn = Database.getInstance().getConn();
         try {
-            Connection conn = Database.getInstance().getConn();
+            
             Statement stmt = conn.createStatement();
             ResultSet rst = stmt.executeQuery("SELECT id, descr FROM docs ORDER by id DESC");
             while (rst.next()) {
@@ -80,21 +86,29 @@ public class PdfController implements Serializable {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            Database.getInstance().closeConnection();
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PdfController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
     public void deleteDoc() {
         Long id = Long.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("doc_id"));
+        Connection conn = Database.getInstance().getConn();
         try {
-            Connection conn = Database.getInstance().getConn();
             PreparedStatement stmt = conn.prepareStatement("DELETE FROM DOCS WHERE id=?");
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PdfController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            Database.getInstance().closeConnection();
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PdfController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         updateDocs();
     }
