@@ -40,6 +40,17 @@
                         <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/devices_config.xhtml">Настройка устройств</h:outputLink></li>
                         <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/protocol_config.xhtml">Настройка опросного листа</h:outputLink></li>
                         <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/upload_docs.xhtml">Загрузить документацию</h:outputLink></li>
+                        <li>
+                            <h:form>
+                                <p:commandLink value="Удалить логи" actionListener="#{logsController.destroyLogs()}">
+                                    <p:confirm header="Подтверждение" message="Вы уверены?" icon="ui-icon-alert" />
+                                </p:commandLink>
+                                <p:confirmDialog global="true">
+                                    <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </h:form>
+                        </li>
                         <div style="clear: both;"></div>
                     </ul>
                 </div>

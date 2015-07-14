@@ -53,7 +53,7 @@ body {
     width: 760px;
     height:440px;
     margin:0 auto;
-    padding: 5px 20px;
+    padding: 5px 10px;
 }
 .header {
     height: 50px;
@@ -311,6 +311,9 @@ body {
 .exceptions ui-paginator img {
     vertical-align: middle; 
 }
+.ui-datatable-scrollable-theadclone {
+    display: none;
+}
 .history_link {
     position: absolute;
     height: 15px;
@@ -402,4 +405,16 @@ body {
 .select_date label {
     margin-right: 10px;
     font-weight: bold;
+}
+.ui-paginator-current {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    font-size: 14px;
+}
+.ui-paginator-rpp-options {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+.paginator-totalCount {
+    font-size: 14px;
 }

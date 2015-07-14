@@ -24,33 +24,30 @@
                     <h1 style="color: red;">Лог аварий</h1>
                     <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt10">
                         <h:form>
-                            <p:dataTable id="tbl" var="ex" value="#{deviceController.historyException}" 
-                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                                         paginator="true" rows="10" style="margin-bottom:20px">
-
+                            <p:dataTable id="tbl" var="ex" value="#{deviceController.alarmModel}" 
+                                         paginatorTemplate="{AlarmCount} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                         paginator="true" rowsPerPageTemplate="12, 20, 30" rows="20" lazy="true"
+                                         scrollable="true" scrollHeight="250">
+                                
+                                <f:facet name="{AlarmCount}">
+                                    <span class="paginator-totalCount">Всего: #{deviceController.alarmsSize}</span>
+                                </f:facet>
                                 <f:facet name="{Exporters}">
                                     <h:commandLink>
                                         <h:graphicImage library="img" name="excel.png" height="22px" style="vertical-align: middle;" />
-                                        <p:dataExporter type="xls" target="tbl" fileName="#{logsController.dataLogsFileName}" />
+                                        <p:dataExporter type="xls" target="tbl" fileName="#{deviceController.alarmsLogsFileName}" />
                                     </h:commandLink>
                                 </f:facet>
-
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Время" />
-                                    </f:facet>
+                                <p:column headerText="Время" style="text-align: center; width: 150px;">
                                     <h:outputText value="#{ex.time}" />
                                 </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Описание" />
-                                    </f:facet>
+                                <p:column headerText="Устройство" style="width: 200px;">
+                                    <h:outputText value="#{ex.device}" />
+                                </p:column>
+                                <p:column headerText="Описание">
                                     <h:outputText value="#{ex.description}" />
                                 </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Состояние" />
-                                    </f:facet>
+                                <p:column headerText="Состояние" style="text-align: center; width: 80px;">
                                     <h:outputText value="#{ex.state}" />
                                 </p:column>
                             </p:dataTable>

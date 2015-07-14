@@ -5,8 +5,11 @@
  */
 package ru.entel.web.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -15,6 +18,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 import ru.entel.db.DeviceExceptionFromDb;
 import ru.entel.db.HistoryDeviceException;
 import ru.entel.db.LogRow;
@@ -32,8 +37,17 @@ public class DeviceController {
     private Device currentDevice;
     private Map<String, Device> allDevices;
     private Map<String, Set<DeviceException>> activeExceptions;
+    private LazyDataModel alarmModel;
 
     public DeviceController() {
+        alarmModel = new LazyDataModel() {
+            @Override
+            public List load(int first, int pageSize, String sortField, SortOrder sortOrder, Map filters) {
+                this.setRowCount(HistoryDeviceException.getAlarmSize());
+                return getHistoryException(first, pageSize);
+            }
+            
+        };
     }
     
     @PostConstruct
@@ -107,6 +121,16 @@ public class DeviceController {
         return allDevices;
     }
 
+    public int getAlarmsSize() {
+        return HistoryDeviceException.getAlarmSize();
+    }
+    
+    public String getAlarmsLogsFileName() {
+        SimpleDateFormat sf = new SimpleDateFormat("dd_MM_yyyy");
+        String date = sf.format(new Date());
+        return "alarms_logs_" + date;
+    }
+    
     public Map<String, Set<DeviceException>> getAllActiveExceptions() {
         this.activeExceptions.clear();
         for (Device device : allDevices.values()) {
@@ -118,10 +142,15 @@ public class DeviceController {
         return activeExceptions;
     }
     
-    public ArrayList<DeviceExceptionFromDb> getHistoryException() {
-        return HistoryDeviceException.getHistory();
+    public ArrayList<DeviceExceptionFromDb> getHistoryException(int first, int pageSize) {
+//        System.out.println("History Ex size:" + HistoryDeviceException.getHistory(first, pageSize).size());
+        return HistoryDeviceException.getHistory(first, pageSize);
     }
 
+    public LazyDataModel getAlarmModel() {
+        return alarmModel;
+    }
+    
     public WebEngine getWebEngine() {
         return webEngine;
     }
