@@ -22,12 +22,13 @@
                         вернуться
                     </h:outputLink>
                     <h1 style="color: red;">Лог аварий</h1>
+                </div>
                     <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt10">
                         <h:form>
                             <p:dataTable id="tbl" var="ex" value="#{deviceController.alarmModel}" 
                                          paginatorTemplate="{AlarmCount} {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                                         paginator="true" rowsPerPageTemplate="12, 20, 30" rows="20" lazy="true"
-                                         scrollable="true" scrollHeight="250">
+                                         paginator="true" rowsPerPageTemplate="30, 50, 100" rows="20" lazy="true"
+                                         scrollable="true" scrollHeight="285">
                                 
                                 <f:facet name="{AlarmCount}">
                                     <span class="paginator-totalCount">Всего: #{deviceController.alarmsSize}</span>
@@ -53,7 +54,7 @@
                             </p:dataTable>
                         </h:form>
                     </h:panelGroup>
-                </div>
+                
             </div>
         </div>
     </h:body>

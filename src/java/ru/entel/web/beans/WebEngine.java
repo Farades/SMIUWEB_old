@@ -9,35 +9,33 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import ru.entel.engine.Engine;
 import ru.entel.web.controllers.DeviceController;
 
-/**
- *
- * @author Артем
- */
 @ManagedBean(name = "webEngine", eager = true)
 @ApplicationScoped
 public class WebEngine {
     private Engine dataEngine;
     private boolean dataEngineStatus = false;
     
-    
-    private DeviceController deviceController;
-    
     public WebEngine() {
+        System.out.println("Web engine constructor");
         this.init();
     }
     
     public void init() {
         try {
+            System.out.println("Web engine init");
             InitialContext ic = new InitialContext();
             DataSource ds = (DataSource) ic.lookup("jdbc/smiu");
             dataEngine = new Engine(ds);
             dataEngine.init();
+//            dataEngine.run();
         } catch (NamingException ex) {
             Logger.getLogger(WebEngine.class.getName()).log(Level.SEVERE, null, ex);
         }

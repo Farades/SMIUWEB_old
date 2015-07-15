@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Entel СМИУ</title>
         <h:outputStylesheet library="css" name="style.css" />
@@ -28,25 +29,34 @@
                     </h:form>
                     <h:panelGroup id="exceptions" layout="block" styleClass="exceptions mt20">
                         <c:if test="#{not empty deviceController.allActiveExceptions.keySet().toArray()}">
-                            <table>
-                                <thead>
-                                    <th>Время</th>
-                                    <th>Описание</th>
-                                    <th>Текущее значение</th>
-                                </thead>
-                                <tbody>
-                                    <ui:repeat value="#{deviceController.allActiveExceptions.entrySet().toArray()}" var="actExEntry">
-                                        <tr><td colspan="3" class="deviceName">#{actExEntry.key}</td></tr>
-                                        <ui:repeat value="#{actExEntry.value.toArray()}" var="actEx">
-                                            <tr>
-                                                <td>#{actEx.time_start}</td>
-                                                <td>#{actEx.description}</td>
-                                                <td>#{actEx.currentValue}</td>
-                                            </tr>
-                                        </ui:repeat>
-                                    </ui:repeat>
-                                </tbody>
-                            </table>
+                            <h:form>
+                                <p:dataTable var="device" value="#{deviceController.allActiveExceptions.entrySet().toArray()}"
+                                             scrollable="true" scrollHeight="330">
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column headerText="Время возникновения" />
+                                            <p:column headerText="Описание" />
+                                            <p:column headerText="Текущее значение" />
+                                        </p:row>
+                                    </p:columnGroup>
+                                    <p:subTable var="exception" value="#{device.value.toArray()}">
+                                        <f:facet name="header">
+                                            <p:column styleClass="active_ex-table-subtale-header">
+                                                <h:outputText value="#{device.key}" />  
+                                            </p:column>
+                                         </f:facet> 
+                                        <p:column>
+                                            <h:outputText value="#{exception.time_start}" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{exception.description}" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:outputText value="#{exception.currentValue}" />
+                                        </p:column>
+                                    </p:subTable>
+                                </p:dataTable>
+                            </h:form>
                         </c:if>
                         <c:if test="#{empty deviceController.allActiveExceptions.keySet().toArray()}">
                             <p style="font-weight: bold; text-align: center; font-size: 16px;">Все измеряемые параметры системы находятся в допустимых пределах.</p>

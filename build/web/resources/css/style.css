@@ -50,8 +50,8 @@ body {
 }
 .main {
     background-color: #FFF;
-    width: 760px;
-    height:440px;
+    width: 780px;
+    height:470px;
     margin:0 auto;
     padding: 5px 10px;
 }
@@ -417,4 +417,7 @@ body {
 }
 .paginator-totalCount {
     font-size: 14px;
+}
+.exceptions .ui-datatable-subtable-header {
+   
 }

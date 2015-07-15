@@ -40,6 +40,7 @@ public class DeviceController {
     private LazyDataModel alarmModel;
 
     public DeviceController() {
+        System.out.println("Device Controller constr: " + allDevices);
         alarmModel = new LazyDataModel() {
             @Override
             public List load(int first, int pageSize, String sortField, SortOrder sortOrder, Map filters) {
@@ -54,6 +55,7 @@ public class DeviceController {
     public void init() {
         allDevices = webEngine.getDataEngine().getDevices();
         activeExceptions = new HashMap<String, Set<DeviceException>>();
+        System.out.println("Device controller PC: " + allDevices);
     }
     
     public String selectDevice() {
