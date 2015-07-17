@@ -61,11 +61,11 @@ public class ConfiguratorController {
         try {
             
             stm = conn.createStatement();
-            rst = stm.executeQuery("SELECT DATA FROM JSON_CONFIG WHERE NAME='devices'");
+            rst = stm.executeQuery("SELECT DATA FROM json_config WHERE NAME='devices'");
             while(rst.next()) {
                 this.devicesData = rst.getString("DATA");
             }
-            rst = stm.executeQuery("SELECT DATA FROM JSON_CONFIG WHERE NAME='protocol'");
+            rst = stm.executeQuery("SELECT DATA FROM json_config WHERE NAME='protocol'");
             while(rst.next()) {
                 this.protocolData = rst.getString("DATA");
             }
@@ -96,7 +96,7 @@ public class ConfiguratorController {
         Connection conn = null;
         try {
             conn = Database.getInstance().getConn();
-            stm = conn.prepareStatement("UPDATE JSON_CONFIG SET DATA=? WHERE NAME='devices'");
+            stm = conn.prepareStatement("UPDATE json_config SET DATA=? WHERE NAME='devices'");
             stm.setString(1, devicesData);
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -120,7 +120,7 @@ public class ConfiguratorController {
         Connection conn = null;
         try {
             conn = Database.getInstance().getConn();
-            stm = conn.prepareStatement("UPDATE JSON_CONFIG SET DATA=? WHERE NAME='protocol'");
+            stm = conn.prepareStatement("UPDATE json_config SET DATA=? WHERE NAME='protocol'");
             stm.setString(1, protocolData);
             stm.executeUpdate();
         } catch (SQLException ex) {

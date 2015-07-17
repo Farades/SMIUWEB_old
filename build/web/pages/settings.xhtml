@@ -27,10 +27,9 @@
                 <div class="block dataEngineStart">
                     <h:form>
                         <h2>Управление опросом устройств</h2>
-                        <div class="buttons">
-                            <h:commandButton value="Старт" action="#{webEngine.dataEngineRun()}" styleClass="btn start" disabled="#{appController.engineState}" />
-                            <h:commandButton value="Стоп" action="#{webEngine.dataEnginestop()}" styleClass="btn stop" disabled="#{!appController.engineState}"/>
-                        </div>
+                        <p:inputSwitch value="#{webEngine.dataEngineStatus}">
+                            <p:ajax listener="#{webEngine.changeDataEngineStatus()}" update=":header" />
+                        </p:inputSwitch>
                     </h:form>
                     <div style="clear: both;"></div>
                 </div>

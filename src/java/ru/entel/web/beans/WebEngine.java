@@ -54,11 +54,23 @@ public class WebEngine {
             dataEngineStatus = false;
         }
     }
+    
+    public void changeDataEngineStatus() {
+        if (dataEngineStatus == true) {
+            dataEngine.run();
+        } else {
+            dataEngine.stop();
+        }
+    }
    
     public boolean isDataEngineStatus() {
         return dataEngineStatus;
     }
 
+    public void setDataEngineStatus(boolean dataEngineStatus) {
+        this.dataEngineStatus = dataEngineStatus;
+    }
+    
     public Engine getDataEngine() {
         return dataEngine;
     }

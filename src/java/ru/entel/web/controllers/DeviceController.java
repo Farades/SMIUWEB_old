@@ -134,14 +134,7 @@ public class DeviceController {
     }
     
     public Map<String, Set<DeviceException>> getAllActiveExceptions() {
-        this.activeExceptions.clear();
-        for (Device device : allDevices.values()) {
-            Set<DeviceException> activeExceptionByDevice = device.getActiveExceptions();
-            if (activeExceptionByDevice.size() > 0) {
-                this.activeExceptions.put(device.getDescription(), activeExceptionByDevice);
-            }
-        }
-        return activeExceptions;
+        return webEngine.getDataEngine().getActiveAlarms();
     }
     
     public ArrayList<DeviceExceptionFromDb> getHistoryException(int first, int pageSize) {
