@@ -376,11 +376,7 @@ body {
     outline: 1px solid #ccc;
     margin-top: 5px;
 }
-.docs_view_table {
-    width: 740px;
-}
 .docs_view_table td {
-    border: 1px solid #ccc;
     vertical-align: middle;
 }
 .docs_view_table td a {
@@ -388,12 +384,10 @@ body {
     height: 40px;
     line-height: 40px;
     text-decoration: none;
-    color: #295F61;
     font-weight: bold;
 }
-.docs_view_table td a:hover {
-    color: #fff;
-    background-color: #00A651;
+.docs_view_table table tr:hover{
+    background-color: #EAF2FD;
 }
 .docs_list_wrap.docs_view_wrap {
     height: 340px;

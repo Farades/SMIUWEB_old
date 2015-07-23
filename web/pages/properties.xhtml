@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Entel СМИУ</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <div class="main">
+            <ui:insert name="header">
+                <ui:include src="/templates/header.xhtml" />
+            </ui:insert>
+            <div class="content">
+                <div class="content_title">
+                    <h:outputLink value="#{facesContext.externalContext.request.contextPath}/pages/settings.xhtml" styleClass="btn back">
+                        <h:graphicImage library="img" name="back.png" height="15px" />
+                        вернуться
+                    </h:outputLink>
+                    <h1>Редактирование свойств проекта</h1>
+                </div>
+                <h:form id="form" style="margin-top: 10px;">
+                    <p:dataTable id="prop_table" var="prop" value="#{appController.properties.values().toArray()}" editable="true" editMode="cell">
+                        <f:facet name="header">
+                            Для редактирования кликните по ячейке, затем Enter
+                        </f:facet>
+
+                        <p:ajax event="cellEdit" update="form:prop_table :header" />
+
+                        <p:column headerText="Название">
+                                <h:outputText value="#{prop.desc}" />
+                        </p:column>
+
+                        <p:column headerText="Значение">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{prop.value}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{prop.value}" style="width:96%" label="Значение"/></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>

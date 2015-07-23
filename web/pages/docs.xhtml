@@ -21,28 +21,25 @@
                         вернуться
                     </h:outputLink>
                     <h1>Загруженная документация</h1>
-                    <h:panelGroup id="docs_list" layout="block">
-                        <div class="docs_list_wrap docs_view_wrap">
-                            <table class="docs_view_table">
-                                <tbody>
-                                    <ui:repeat value="#{pdfController.docs}" var="doc">
-                                        <tr>
-                                            <td class="col1">
-                                                <p:lightBox iframe="true" id="lighbox3">
-                                                    <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
-                                                        <h:graphicImage library="img" name="pdf.png" height="40px" />
-                                                        #{doc.descr}
-                                                        <f:param name="id" value="#{doc.id}"/>
-                                                    </h:outputLink>
-                                                </p:lightBox>
-                                            </td>
-                                        </tr>
-                                    </ui:repeat> 
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </h:panelGroup>
+                    <h:form id="form" style="margin-top: 10px;">
+                        <p:dataTable styleClass="docs_view_table" var="doc" value="#{pdfController.docs}" scrollable="true" scrollHeight="320">
+                            <f:facet name="header">
+                                Кликните по нужному пункту для просмотра
+                            </f:facet>
+                            <p:column headerText="id" style="width: 50px; text-align: center;">
+                                <h:outputText value="#{doc.id}" />
+                            </p:column>
+                            <p:column headerText="Название" styleClass="docsViewTable-descr">
+                               <p:lightBox iframe="true" id="lighbox3">
+                                    <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
+                                        <h:graphicImage library="img" name="pdf.png" height="40px" />
+                                        #{doc.descr}
+                                        <f:param name="id" value="#{doc.id}"/>
+                                    </h:outputLink>
+                                </p:lightBox>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
                 </div>
             </div>
         </div>

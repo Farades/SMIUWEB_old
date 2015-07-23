@@ -21,6 +21,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.UploadedFile;
 import ru.entel.db.Database;
 import ru.entel.web.entity.Doc;
@@ -33,6 +34,7 @@ import ru.entel.web.entity.Doc;
 @ApplicationScoped
 public class PdfController implements Serializable {
     private ArrayList<Doc> docs = new ArrayList<Doc>();
+    private Doc selectedDoc;
     
     public PdfController() {
     }
@@ -113,10 +115,16 @@ public class PdfController implements Serializable {
         updateDocs();
     }
 
+    public Doc getSelectedDoc() {
+        return selectedDoc;
+    }
+
+    public void setSelectedDoc(Doc selectedDoc) {
+        System.out.println(selectedDoc.getDescr());
+        this.selectedDoc = selectedDoc;
+    }
+    
     public ArrayList<Doc> getDocs() {
         return docs;
     }
-    
-    
-    
 }

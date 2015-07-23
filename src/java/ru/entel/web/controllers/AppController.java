@@ -13,16 +13,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedProperty;
+import org.primefaces.event.CellEditEvent;
 import ru.entel.db.Database;
 import ru.entel.web.beans.WebEngine;
+import ru.entel.web.entity.AppProperty;
 
 /**
  *
@@ -31,25 +36,47 @@ import ru.entel.web.beans.WebEngine;
 @ManagedBean
 @ApplicationScoped
 public class AppController {
-    private String objName;
+    private HashMap<String, AppProperty> properties;
     
     @ManagedProperty(value = "#{webEngine}")
     private WebEngine webEngine;
     
     public AppController() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        initProperties();
+    }
+    
+    public void initProperties() {
+        Connection conn = null;
+        this.properties = new HashMap<>();
         try {
-            Statement stm = null;
-            Connection conn = null;
-            ResultSet rst = null;
             conn = Database.getInstance().getConn();
-            stm = conn.createStatement();
-            rst = stm.executeQuery("SELECT `value` FROM `properties` WHERE name='obj_name'");
+            Statement stmt = conn.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT * FROM properties");
             while(rst.next()) {
-                this.objName = rst.getString("value");
+                Long id = rst.getLong("id");
+                String name = rst.getString("name");
+                String value = rst.getString("value");
+                String desc = rst.getString("desc");
+                this.properties.put(name, new AppProperty(id, name, value, desc));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConfiguratorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+    }
+
+    public HashMap<String, AppProperty> getProperties() {
+        initProperties();
+        return properties;
     }
     
     public String getTime() {
@@ -72,8 +99,7 @@ public class AppController {
     }
     
     public String getObjName() {
-        
-        return this.objName;
+        return this.properties.get("obj_name").getValue();
     }
     
     public String getStrEngineStatus() {
@@ -95,4 +121,6 @@ public class AppController {
     public void setWebEngine(WebEngine webEngine) {
         this.webEngine = webEngine;
     }
+    
+    
 }
