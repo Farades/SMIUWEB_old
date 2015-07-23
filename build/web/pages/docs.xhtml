@@ -22,7 +22,9 @@
                     </h:outputLink>
                     <h1>Загруженная документация</h1>
                     <h:form id="form" style="margin-top: 10px;">
-                        <p:dataTable styleClass="docs_view_table" var="doc" value="#{pdfController.docs}" scrollable="true" scrollHeight="320">
+                        <p:dataTable styleClass="docs_view_table" var="doc" value="#{pdfController.docs}" 
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     paginator="true" rows="5">
                             <f:facet name="header">
                                 Кликните по нужному пункту для просмотра
                             </f:facet>

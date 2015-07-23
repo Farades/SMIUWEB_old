@@ -97,6 +97,7 @@ public class PdfController implements Serializable {
     }
     
     public void deleteDoc() {
+        System.out.println("Delete doc");
         Long id = Long.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("doc_id"));
         Connection conn = Database.getInstance().getConn();
         try {

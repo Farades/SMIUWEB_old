@@ -55,6 +55,7 @@ public class PdfContent extends HttpServlet {
                 conn.close();
             }
             response.setContentLength(content.length);
+            out.flush();
             out.write(content);
         }catch (Exception ex){
             ex.printStackTrace();

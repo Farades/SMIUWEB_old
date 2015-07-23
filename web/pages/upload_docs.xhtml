@@ -21,45 +21,42 @@
                         вернуться
                     </h:outputLink>
                     <h1>Добавление документации</h1>
-                    <h:panelGroup id="docs_list" layout="block">
-                        <h2>Загруженная документация</h2>
-                        <div class="docs_list_wrap">
-                            <table class="docs_table">
-                                <thead>
-                                    <th>Название</th>
-                                    <th></th>
-                                </thead>
-                                <tbody>
-
-                                    <ui:repeat value="#{pdfController.docs}" var="doc">
-                                        <tr>
-                                            <td class="col1">
-                                                <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
-                                                   #{doc.descr}
-                                                    <f:param name="id" value="#{doc.id}"/>
-                                                </h:outputLink>
-                                            </td>
-                                            <td class="col3">
-                                                <h:form>
-                                                    <p:commandButton actionListener="#{pdfController.deleteDoc()}" value="Удалить" update=":docs_list">
-                                                        <f:param name="doc_id" value="#{doc.id}" />
-                                                    </p:commandButton>
-                                                </h:form>
-                                            </td>
-                                        </tr>
-                                    </ui:repeat> 
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </h:panelGroup>
-                    <br />
-                    <h:form enctype="multipart/form-data" id="formUploadPdf">
-                        <p:fileUpload fileUploadListener="#{pdfController.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                            update="messages :docs_list @form" sizeLimit="16777215" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" />
+                    <h:form enctype="multipart/form-data" id="formUploadPdf" style="margin-top: 10px;">
+                        <p:fileUpload fileUploadListener="#{pdfController.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                            auto="true" update="messages :form" sizeLimit="16777215" allowTypes="/(\.|\/)(pdf)$/" />
                         <p:growl id="messages" showDetail="true" />
                     </h:form>
-
+                    <h:form id="form" style="margin-top: 10px;">
+                        <p:dataTable styleClass="docs_view_table" var="doc" value="#{pdfController.docs}" 
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     paginator="true" rows="3">
+                            <p:column headerText="id" style="width: 50px; text-align: center;">
+                                <h:outputText value="#{doc.id}" />
+                            </p:column>
+                            <p:column headerText="Название" styleClass="docsViewTable-descr">
+                               <p:lightBox iframe="true" id="lighbox3">
+                                    <h:outputLink styleClass="" value="#{request.contextPath}/PdfContent" target="_blank">
+                                        <h:graphicImage library="img" name="pdf.png" height="40px" />
+                                        #{doc.descr}
+                                        <f:param name="id" value="#{doc.id}"/>
+                                    </h:outputLink>
+                                </p:lightBox>
+                            </p:column>
+                            <p:column style="width: 100px;">
+                                <h:form>
+                                    <p:commandButton actionListener="#{pdfController.deleteDoc()}" value="Удалить" update=":form">
+                                        <f:param name="doc_id" value="#{doc.id}" />
+                                        <p:confirm header="Подтверждение" message="Вы уверены?" icon="ui-icon-alert" />
+                                        
+                                    </p:commandButton>
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton value="Да" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Нет" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+                                </h:form>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
                 </div>
             </div>
         </div>
